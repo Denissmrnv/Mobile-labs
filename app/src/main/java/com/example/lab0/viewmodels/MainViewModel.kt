@@ -5,13 +5,20 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.lab0.api.Common
 import com.example.lab0.data.Cat
+import com.example.lab0.db.CatDao
+import com.example.lab0.db.CatRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 
-class MainViewModel:ViewModel() {
+@HiltViewModel
+class MainViewModel @Inject constructor(private val repo: CatRepository) : ViewModel() {
     var errorMessage: String by mutableStateOf("")
     var loading: Boolean by mutableStateOf(true)
     var catsList:ArrayList<Cat> by mutableStateOf(arrayListOf())
+    val cats = repo.getCatsFromRoom()
 
     fun requestCatList(){
         viewModelScope.launch {

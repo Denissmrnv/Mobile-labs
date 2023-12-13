@@ -22,7 +22,9 @@ import com.example.lab0.ui.theme.NavRoutes
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -92,7 +94,8 @@ fun Greeting(fillMaxSize: Modifier) {
                 slideOutHorizontally(targetOffsetX = { 1000 }, animationSpec = springSpec)
             }) { backStackEntry ->
             val id = backStackEntry.arguments?.getString("id")
-            DetailScreen(navController = navController, id, viewModel)
+//            DetailScreen(navController = navController, id, viewModel)
+            DetailScreen(navController = navController, id)
         }
     }
 }
