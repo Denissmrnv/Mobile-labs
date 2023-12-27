@@ -17,14 +17,10 @@ import dagger.hilt.components.SingletonComponent
 @InstallIn(SingletonComponent::class)
 class AppModule {
     @Provides
-    fun provideCatDb(//доступ к базе данных
-        @ApplicationContext
-        context : Context
-    ) = Room.databaseBuilder(
-        context,
-        CatDb::class.java,
-        CAT_TABLE
-    ).build()
+    fun provideCatDb(@ApplicationContext context : Context) = Room
+        .databaseBuilder(context, CatDb::class.java, CAT_TABLE)
+        .allowMainThreadQueries()
+        .build()
     @Provides
     fun provideCatDao(//доступ к Data Access Object
         catDb: CatDb

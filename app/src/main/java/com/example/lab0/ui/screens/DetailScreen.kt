@@ -1,6 +1,5 @@
 package com.example.lab0.ui.screens
 
-import MainViewModel
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -20,6 +19,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
+import com.example.lab0.viewmodels.MainViewModel
 import dagger.*
 
 import dagger.hilt.android.lifecycle.*

@@ -1,6 +1,5 @@
 package com.example.lab0
 
-import MainViewModel
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -13,19 +12,24 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.IntOffset
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.lab0.ui.screens.DetailScreen
 import com.example.lab0.ui.screens.ListScreen
 import com.example.lab0.ui.screens.LoginScreen
 import com.example.lab0.ui.screens.SplashScreen
+import com.example.lab0.ui.theme.Lab0Theme
 import com.example.lab0.ui.theme.NavRoutes
+import com.example.lab0.viewmodels.MainViewModel
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -34,11 +38,10 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun Greeting(fillMaxSize: Modifier) {
-    val viewModel: MainViewModel = viewModel()
+    val viewModel: MainViewModel = hiltViewModel()
     val navController = rememberAnimatedNavController()
     val springSpec = spring<IntOffset>(dampingRatio = Spring.DampingRatioMediumBouncy)
     AnimatedNavHost(
@@ -62,7 +65,7 @@ fun Greeting(fillMaxSize: Modifier) {
             popExitTransition = { ->
                 slideOutHorizontally(targetOffsetX = { 1000 }, animationSpec = springSpec)
             }
-            ) {
+        ) {
             LoginScreen(navController = navController)
         }
         composable(NavRoutes.List.route,
@@ -94,8 +97,7 @@ fun Greeting(fillMaxSize: Modifier) {
                 slideOutHorizontally(targetOffsetX = { 1000 }, animationSpec = springSpec)
             }) { backStackEntry ->
             val id = backStackEntry.arguments?.getString("id")
-//            DetailScreen(navController = navController, id, viewModel)
-            DetailScreen(navController = navController, id)
+            DetailScreen(navController = navController, id, viewModel)
         }
     }
 }

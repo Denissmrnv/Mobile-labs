@@ -1,6 +1,5 @@
 package com.example.lab0.ui.screens
 
-import MainViewModel
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -34,6 +33,7 @@ import androidx.navigation.NavHostController
 import com.example.lab0.ui.theme.NavRoutes
 import coil.compose.rememberAsyncImagePainter
 import com.example.lab0.data.Cat
+import com.example.lab0.viewmodels.MainViewModel
 import androidx.compose.foundation.Image as Image
 
 
